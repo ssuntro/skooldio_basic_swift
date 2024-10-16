@@ -45,6 +45,10 @@ enum Direction {
         }
     }
 }
+// Note: for more detail about if...let. Please visit Nullable/Non-nullable chapter.
 if let direction = Direction(abbreviation: "n") {
-    print(direction) // Output: north
+    // reach this line when direction is not null
+    print(direction)
+} else {
+    // reach this line when direction is null
 }
