@@ -1,7 +1,10 @@
-//: [Previous](@previous)
+//let str = "Hello"
+//let outOfBoundsIndex = str.index(str.startIndex, offsetBy: 55)
 
-import Foundation
 
-var greeting = "Hello, playground"
+for character in "Dog!🐶" {
+    print(character)
+}
+let catCharacters: [Character] = ["C", "a", "t", "!", "🐱"]
+String(catCharacters) // "Cat!🐱"
 
-//: [Next](@next)
