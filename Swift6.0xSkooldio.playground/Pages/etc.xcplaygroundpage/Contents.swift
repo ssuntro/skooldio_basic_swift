@@ -28,73 +28,12 @@ import Foundation
 //}
 
 
-// what's new in swift 5
-// String - new way to escapt special char such as \n in this context
-print("Line 1\nLine 2")
-print(#"Line 1\nLine 2"#)
-
-// introduce Result type
-enum MathError: Error {
-    case divideByZero
-}
-
-func divide(_ number: Int, by divisor: Int) -> Result<Int, MathError> {
-    if divisor == 0 {
-        return .failure(.divideByZero)
-    } else {
-        return .success(number / divisor)
-    }
-}
-
-let result = divide(10, by: 2)
-// result will be .success(5)
-
-let badResult = divide(10, by: 0) // badResult will be .failure(.divideByZero)
-
-
-// Int - isMultiple
-let number = 10
-if number.isMultiple(of: 2) {
-    print("It's an even number!")
-}
-
-
-// what's new in swift 6
-// Better Concurrency Checking
-actor Player {
-    var score: Int = 0
-
-    func updateScore(_ newScore: Int) {
-        score = newScore
-    }
-}
-
-let player = Player()
-Task {
-    await player.updateScore(100)
-    // This is safe because Swift 6 knows it's okay!
-}
-
-// Typed Throws:
-enum GameError: Error {
-    case outOfLives
-    case levelNotFound
-}
-
-func playGame() throws(GameError) {
-    // If something goes wrong, we know it will be a GameError
-}
-
-
-// Macros
-//@MyMacro // The macro might automatically add things like printInfo() method
-//struct Player {
-//    var name: String
-//    var score: Int
-//}
 
 
 
+
+
+// what's new in swift 5, 6
 // Swift Testing
 //import SwiftTesting
 //@Test
@@ -105,4 +44,33 @@ func playGame() throws(GameError) {
 
 
 
-// etc - https://github.com/twostraws/whats-new-in-swift-6-0/tree/main, https://www.hackingwithswift.com/articles/269/whats-new-in-swift-6
+
+
+
+
+// swift 6 - Tuples now conform to Equatable, Comparable and Hashable
+// Equatable
+(1, 2, 3) == (1, 2, 3) // true
+// Labels are not taken into account to check for equality.
+(x: 0, y: 0) == (0, 0) // true
+
+// Comparable
+let origin = (x: 0, y: 0)
+let randomPoint = (x: Int.random(in: 1 ... 10), y: Int.random(in: 1 ... 10))
+(x: 0, y: 0) < (1, 0) // true
+// Labels are not taken into account for comparision.
+(x: 0, y: 0) < (1, 0) // true
+
+// Hashable
+let points = [(x: 0, y: 0), (x: 1, y: 2), (x: 0, y: 0)]
+let uniquePoints = Set(points)
+print (uniquePoints) // [(x: 0, y: 0), (x: 1, y: 2)]
+// Labels are not taken into account to check for hash value.
+(x: 0, y: 0).hashValue == (0, 0).hashValue // true
+
+
+
+// etc - https://github.com/twostraws/whats-new-in-swift-6-0/tree/main, https://www.hackingwithswift.com/articles/269/whats-new-in-swift-6, https://medium.com/@aayushi9555/whats-new-in-swift-6-c3384bb93e63#:~:text=Swift%206%20brings%20a%20host%20of%20new%20features%20and%20improvements%20that%20make,enhanced%20concurrency, https://blog.swiftify.com/whats-new-in-swift-6-e875ca675a28#:~:text=Tuples%20Conform%20to,and%20Hashable
+
+
+
