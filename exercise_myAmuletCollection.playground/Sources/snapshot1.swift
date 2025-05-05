@@ -38,7 +38,7 @@ struct Amulet {
         self.year = year
         self.temple = temple
         self.price = price
-        self.category = // TODO: สร้าง enum instance ถ้าสร้าง enum instance ไม่ได้ให้ใช้ default เป็น AmuletCategory.coin
+        self.category = // TODO: สร้าง enum instance ด้วยฟังก์ชัน AmuletCategory.init(from:...) หากสร้าง enum instance ไม่ได้ให้ใช้ default เป็น AmuletCategory.coin
     }
 }
 
