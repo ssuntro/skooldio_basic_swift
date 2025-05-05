@@ -28,8 +28,6 @@ extension AmuletCategory {
 
 }
 
-// 2. Struct for Amulet
-// test - var/let
 struct Amulet {
     let name: String
     let year: Int
