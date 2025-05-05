@@ -116,5 +116,9 @@ expensiveAmulets.forEach { a in
     print(a)
 }
 
+print("🔍 Expensive amulets from วัดระฆัง")
+for a in store.amulets where a.temple == "วัดระฆัง" && a.price > 30000 {
+    print(a)
+}
 
 
