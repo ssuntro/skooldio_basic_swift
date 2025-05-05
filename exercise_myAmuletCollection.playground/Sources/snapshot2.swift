@@ -9,7 +9,7 @@
 
 import Foundation
 
-enum AmuletCategory {
+enum AmuletCategory: String {
     case coin = "เหรียญ"
     case powder = "พระผง"
     case statue = "พระกริ่ง"
@@ -46,10 +46,16 @@ struct Amulet {
 }
 
 
-// TODO: สร้าง ตัวแปรเก็บจำนวนครั้งที่ copy
-
 extension Amulet: Hashable {
     static func == (lhs: Amulet, rhs: Amulet) -> Bool {
         // TODO: สร้าง logic เพื่อเปรียบเทียบว่า 2 Amulet instances คือพระชิ้นเดียวกัน ชิ้นเดียวกันพิจารณาจาก ชื่อ และปี และวัดต้องตรงกัน
     }
 }
+
+
+
+assert(Amulet(
+    name: "พระสมเด็จวัดระฆัง", year: 2400, temple: "วัดระฆัง", price: 10,
+    category: "พระกริ่ง") == Amulet(
+    name: "พระสมเด็จวัดระฆัง", year: 2400, temple: "วัดระฆัง", price: 990000,
+    category: "พระกริ่ง"))
