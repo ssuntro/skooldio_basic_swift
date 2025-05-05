@@ -1,8 +1,8 @@
 import Foundation
+
 ////
 ///
 ///
-
 
 // 1. Enum for Category
 enum AmuletCategory: String {
@@ -30,7 +30,7 @@ extension AmuletCategory {
 
 // 2. Struct for Amulet
 // test - var/let
-struct Amulet: Hashable {
+struct Amulet {
     let name: String
     let year: Int
     let temple: String
@@ -38,12 +38,20 @@ struct Amulet: Hashable {
     let category: AmuletCategory
 }
 
+extension Amulet: Hashable {
+    static func == (lhs: Amulet, rhs: Amulet) -> Bool {
+
+        return lhs.name == rhs.name && lhs.year == rhs.year
+            && lhs.temple == rhs.temple  //ชื่อ และปี และวัดต้องตรงกัน
+    }
+}
+
+
 // 3. Class for Amulet Storage
 struct AmuletStore {
 
-//    var amulets: [Amulet] = []
+    //    var amulets: [Amulet] = []
     var amulets: Set<Amulet> = []
-
 
     // 4. Function to add Amulet
     mutating func addAmulet(_ amulet: Amulet) {
@@ -57,14 +65,8 @@ struct AmuletStore {
 
     // 5. Function to check duplicate
     func isDuplicate(_ newAmulet: Amulet) -> Bool {
-        for amulet in amulets {
-            if amulet.name == newAmulet.name && amulet.year == newAmulet.year
-                && amulet.temple == newAmulet.temple
-            {
-                return true
-            }
-        }
-        return false
+        return amulets.contains(newAmulet)
+        //        return amulets.contains { $0 == newAmulet}
     }
 
     // 6. Function to find the most expensive Amulet
@@ -86,13 +88,19 @@ var store = AmuletStore()
 let amulet1 = Amulet(
     name: "พระสมเด็จวัดระฆัง", year: 2400, temple: "วัดระฆัง", price: 50000,
     category: .powder)
-let amulet2 = Amulet(
+var amulet2 = Amulet(
     name: "พระกริ่งวัดสุทัศน์", year: 2470, temple: "วัดสุทัศน์", price: 40000,
     category: .statue)
 
 store.addAmulet(amulet1)
 store.addAmulet(amulet2)
 store.addAmulet(amulet1)  // ลองเพิ่มซ้ำ
+
+// ลอง ไม่ remove & ไม่ add เข้าไปใหม่
+// ลอง add ใหม่แบบไม่ remove ก่อน
+amulet2.price = 400000
+store.amulets.remove(amulet2)
+store.addAmulet(amulet2)
 
 if let topAmulet = store.mostExpensiveAmulet() {
     print("💎 Top Amulet: \(topAmulet.name) ราคา \(topAmulet.price) บาท")
@@ -103,7 +111,10 @@ if let topAmulet = store.mostExpensiveAmulet() {
 let expensiveAmulets = store.filterExpensiveAmulets(minPrice: 10000)
 print("🧮 Expensive Amulets (>10,000): \(expensiveAmulets.count) found")
 
-
+print("✨ All amulet in my collection")
+expensiveAmulets.forEach { a in
+    print(a)
+}
 
 
 
