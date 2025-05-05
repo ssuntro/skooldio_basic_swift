@@ -1,4 +1,8 @@
 import Foundation
+////
+///
+///
+
 
 // 1. Enum for Category
 enum AmuletCategory: String {
@@ -26,7 +30,7 @@ extension AmuletCategory {
 
 // 2. Struct for Amulet
 // test - var/let
-struct Amulet {
+struct Amulet: Hashable {
     let name: String
     let year: Int
     let temple: String
@@ -35,15 +39,18 @@ struct Amulet {
 }
 
 // 3. Class for Amulet Storage
-class AmuletStore {
-    private var amulets: [Amulet] = []
+struct AmuletStore {
+
+//    var amulets: [Amulet] = []
+    var amulets: Set<Amulet> = []
+
 
     // 4. Function to add Amulet
-    func addAmulet(_ amulet: Amulet) {
+    mutating func addAmulet(_ amulet: Amulet) {
         if isDuplicate(amulet) {
             print("⚠️ This amulet already exists.")
         } else {
-            amulets.append(amulet)
+            amulets.insert(amulet)
             print("✅ Amulet added successfully.")
         }
     }
@@ -74,7 +81,7 @@ class AmuletStore {
 // ---
 // 📋 Usage Example:
 
-let store = AmuletStore()
+var store = AmuletStore()
 
 let amulet1 = Amulet(
     name: "พระสมเด็จวัดระฆัง", year: 2400, temple: "วัดระฆัง", price: 50000,
@@ -95,3 +102,8 @@ if let topAmulet = store.mostExpensiveAmulet() {
 
 let expensiveAmulets = store.filterExpensiveAmulets(minPrice: 10000)
 print("🧮 Expensive Amulets (>10,000): \(expensiveAmulets.count) found")
+
+
+
+
+
