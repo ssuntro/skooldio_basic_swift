@@ -82,7 +82,6 @@ struct AmuletStore {
 
 // ---
 // 📋 Usage Example:
-
 var store = AmuletStore()
 
 let amulet1 = Amulet(
