@@ -36,6 +36,13 @@ struct Amulet {
     let temple: String
     var price: Double
     let category: AmuletCategory
+    init(name: String, year: Int, temple: String, price: Double, category: String) {
+        self.name = name
+        self.year = year
+        self.temple = temple
+        self.price = price
+        self.category = AmuletCategory.init(from: category) ?? AmuletCategory.coin //AmuletCategory.init(rawValue:...)
+    }
 }
 
 extension Amulet: Hashable {
@@ -83,13 +90,12 @@ struct AmuletStore {
 // ---
 // 📋 Usage Example:
 var store = AmuletStore()
-
 let amulet1 = Amulet(
     name: "พระสมเด็จวัดระฆัง", year: 2400, temple: "วัดระฆัง", price: 50000,
-    category: .powder)
+    category: "พระผง")
 var amulet2 = Amulet(
     name: "พระกริ่งวัดสุทัศน์", year: 2470, temple: "วัดสุทัศน์", price: 40000,
-    category: .statue)
+    category: "พระกริ่ง")
 
 store.addAmulet(amulet1)
 store.addAmulet(amulet2)
@@ -109,7 +115,6 @@ if let topAmulet = store.mostExpensiveAmulet() {
 
 let expensiveAmulets = store.filterExpensiveAmulets(minPrice: 10000)
 print("🧮 Expensive Amulets (>10,000): \(expensiveAmulets.count) found")
-
 print("✨ All amulet in my collection")
 expensiveAmulets.forEach { a in
     print(a)
