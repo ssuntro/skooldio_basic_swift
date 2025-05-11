@@ -220,24 +220,91 @@
 
 
 
-//MARK: enum and Custom Initializers
-enum Temperature {
-    case celsius(Double)
-    case fahrenheit(Double)
-    
-    init(fromKelvin kelvin: Double) {
-        self = .celsius(kelvin - 273.15)
-    }
-}
-let c = Temperature.celsius(222)
-let d = Temperature(fromKelvin: 222)
-let e = Temperature.fahrenheit(111)
+////MARK: enum and Custom Initializers
+//enum Temperature {
+//    case celsius(Double)
+//    case fahrenheit(Double)
+//    
+//    init(fromKelvin kelvin: Double) {
+//        self = .celsius(kelvin - 273.15)
+//    }
+//}
+//let c = Temperature.celsius(222)
+//let d = Temperature(fromKelvin: 222)
+//let e = Temperature.fahrenheit(111)
 
 
 
 
+////MARK: basic Tuple
+//let unnamedTuple = ("John")
+//let unnamedTuple1 = ("John", "Doe", 30)
+//print(unnamedTuple)
+//print(unnamedTuple1.0)
+//print(unnamedTuple1.1)
+//print(unnamedTuple1.2)
+//let http404Error: (Int, String) = (404, "Not Found")
+
+////MARK: named tuple
+//let person: (name: String, age: Int) = (name: "Alex", age: 30)
+//print(person.name)
+//let namedTuple = (firstName: "John", lastName: "Doe", age: 30)
+//print(namedTuple.firstName)
+//
+//typealias NameTuple = (firstName: String, middleName: String?)
+//var tupleArray: [NameTuple] = []
+//tupleArray.append( (firstName: "Bob", middleName: nil) )
+//tupleArray.append( (firstName: "Tom", middleName: "Smith") )
+//
+////MARK: deconstruct Data
+//func getCoordinate() -> (Double, Double) {
+//    return (2.3, 134)
+//}
+//
+//let (_, long) = getCoordinate()
+//print(long)
 
 
 
+////MARK: Switch...case & tuple
+////example1
+//let coordinates = (3, "3")
+//switch coordinates {
+//case (0, "0"):
+//    print("Origin")
+//case (let x, "0"):
+//    print("On the X-axis at \(x)")
+//case (0, let y):
+//    print("On the Y-axis at \(y)")
+//case (let x, let y) where x == Int(y):
+//    print("On the line x = y")
+//default: //use with care
+//    print("Somewhere else")
+//}
+////example2
+//let person: (name: String?, age: Int?) = ("Alice", nil)
+//switch person {
+//case (nil, nil):
+//    print("No information available")
+//case (let name?, nil):
+//    print("\(name) has no age provided")
+//case (nil, let age?):
+//    print("Anonymous person, age \(age)")
+//case let (name?, age?):
+//    print("\(name) is \(age) years old")
+//}
+
+
+
+////MARK: Loop & tuple
+//let students: [(name: String, grade: Int)] = [
+//    (name: "Alice", grade: 90),
+//    (name: "Bob", grade: 85),
+//    (name: "Charlie", grade: 78)
+//]
+//
+//for (name, grade) in students where name == "Alice" {
+//    print("\(name) scored \(grade) marks.")
+//}
 
 
