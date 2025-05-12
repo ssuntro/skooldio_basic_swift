@@ -308,3 +308,224 @@
 //}
 
 
+////MARK: struct & Custom initializer
+//import Foundation
+//struct Book {
+//    var title: String
+//    var author: String
+//    var yearPublished: Int
+//    // Custom initializer
+//    init(title: String = "", author: String = "", year: Int = 1999) {
+//        self.title = title
+//        self.author = author
+//        self.yearPublished = year
+//    }
+//    // Another custom initializer with default year
+//    init(isbn: String) {
+//        self.title = "unknown"
+//        self.author = "unknown"
+//        self.yearPublished = Calendar.current.component(.year, from: Date())
+//    }
+//}
+//let a = Book(isbn: "")
+//let b = Book(title: "", author: "", year: 1999)
+
+
+
+
+
+
+////MARK: struct. value type vs reference type
+//struct Person {
+//    var firstName: String
+//    var lastName: String
+//    var age: Int
+//    func fullName() -> String {
+//        return "\(firstName) \(lastName)"
+//    }
+//}
+//
+//var person1 = Person(firstName: "John", lastName: "Doe", age: 30)
+//let person2 = person1
+//person1.firstName = "Anne"
+//
+//print(person1.fullName()) //what's outcome
+//print(person2.fullName()) //what's outcome
+
+
+
+
+
+
+
+////MARK: "Struct is immutable by default" concept in struct
+//struct Counter {
+//    var count: Int
+//    var name: String
+//    mutating func increment() {
+//        count += 1
+//    }
+//}
+//var counter = Counter(count: 1, name: "")
+//counter.count = 11
+//counter.increment()
+
+
+
+
+////MARK: basic class
+//class Person {
+//    var firstName: String
+//    var lastName: String
+//    var age: Int
+//    init(firstName: String, lastName: String, age: Int) {
+//        self.firstName = firstName
+//        self.lastName = lastName
+//        self.age = age
+//    }
+//    var fullName: String {
+//        return "\(firstName) \(lastName)"
+//    }
+//}
+//var person1 = Person(firstName: "John", lastName: "Doe", age: 30)
+//let person2 = person1
+//person1.firstName = "Anne"
+//
+//print(person1.fullName) //what's outcome
+//print(person2.fullName) //what's outcome
+
+
+
+
+////MARK: class inheritance
+//class Animal {
+//    var name: String
+//
+//    init(name: String) {
+//        self.name = name
+//    }
+//    func speak() {
+//        print("\(name) makes a sound")
+//    }
+//}
+//class Cat: Animal {
+//    override func speak() {
+//        print("\(name) meows")
+//    }
+//}
+//class Dog: Animal {
+//    override func speak() {
+//        print("\(name) barks")
+//    }
+//}
+//
+//
+//let animals: [Animal] = [Dog(name: "Rex"), Cat(name: "Whiskers")]
+//for animal in animals {
+//    animal.speak() // Polymorphism: calls correct method based on runtime type
+//}
+//
+//// 3 key use cases of class inheritance in general
+////1. Code reuse
+////2. Polymorphism
+////3. Extensibility: You can add new subclasses without changing existing code.
+
+
+
+////MARK: 🌧️Inheritance down side
+//// Let’s say we add Flying behavior to Bird:
+//class Animal {}
+//class Bird: Animal {
+//    func fly() {
+//        print("flying")
+//    }
+//    //....
+//}
+//// Now suppose we add a Penguin, which is a Bird... but it can’t fly:
+//class Penguin: Bird {
+//    override func fly() {
+//        // throw CancellationError()
+//        print("Oops! Penguins can't fly.")
+//    }
+//}
+//// Now we have a problem:
+//let penguin = Penguin()
+//penguin.fly() // Makes no sense: Penguins shouldn't be forced to fly
+
+
+
+
+
+
+
+////MARK: A final class - cannot be subclassed
+//final class PaymentProcessor {
+//    func process(amount: Double) {
+//        print("Processing payment of $\(amount)")
+//    }
+//}
+//
+////// This will cause a compile-time error if uncommented:
+//// class CustomProcessor: PaymentProcessor {
+////     override func process(amount: Double) {
+////         print("Custom processing of $\(amount)")
+////     }
+//// }
+//
+//let processor = PaymentProcessor()
+//processor.process(amount: 99.99)
+
+
+
+
+
+
+
+////MARK: basic protocol
+//protocol Identifiable {
+//    var id: String { get }
+//}
+//
+////conformation
+//struct User: Identifiable {
+//    var id: String //absent can lead to compiler error
+//    var name: String
+//}
+//
+////not conformation
+//class Product {
+//    var id: String
+//    var price: Double
+//
+//    init(id: String, price: Double) {
+//        self.id = id
+//        self.price = price
+//    }
+//}
+
+
+//MARK: Protocol extension
+protocol Greeter {
+    func greet()
+}
+
+// Default implementation using a protocol extension
+extension Greeter {
+    func greet() {
+        print("Hello from protocol extension!")
+    }
+}
+
+// Struct conforming to Greeter but NOT overriding greet()
+struct DefaultGreeter: Greeter {
+    // Uses default implementation
+}
+
+// Struct overriding greet() with custom behavior
+struct CustomGreeter: Greeter {
+    func greet() {
+        print("Hi from CustomGreeter!")
+    }
+}
+
+
